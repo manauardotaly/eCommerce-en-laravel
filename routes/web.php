@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\job;
+use App\Http\Controllers\userController;
+use App\Http\Controllers\productController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,19 +18,9 @@ use App\job;
 //login
 //oute::get('admin', 'loginController@adminIndex')->name('admin.login');
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('login');
 });
 
-
-
-Route::get('/get-data', function(){
-    $data = job::all();
-
-    echo '<pre>';
-    print_r($data);
-    echo '</pre>';
-    die();
-    // $data1 = compact('data');
-    // return view('getdata')->with($data1);
-});
+Route::post('/login', [userController::class,'login']);
+Route::get('/', [productController::class,'index']);
